@@ -12,13 +12,36 @@ using namespace std;
 template <typename T>
 T findMaxRecTail(const T[] arr, const int size, int = 0)
 {
-    // TO DO: Implement your code
+	if (size == 1) {
+		return arr[0];
+	}
+
+	T max = findMaxRecTail(arr, size - 1);
+
+    if (arr[size - 1] > max) {
+        return arr[size - 1];
+    }
+    else
+    {
+		return max;
+    }
 }
 
 template <typename T>
 T findMaxRecBinarySplit(const T[] arr, const int left, const int right)
 {
     // TO DO: Implement your code
+
+    if (left == right) { //base case
+        return arr[left];
+    }
+
+    int mid = left + (right - left) / 2;
+
+    T maxLeft = findMaxRecBinarySplit(arr, left, mid);
+    T maxRight = findMaxRecBinarySplit(arr, mid + 1, right);
+    
+    return (maxLeft > maxRight) ? maxLeft : maxRight;
 }
 /*******************************************************************************
  * Description:
